@@ -1,10 +1,13 @@
 name: Template for my practice
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
   pull_request:
+    branches:
+      - "**"
   
 jobs:
   deploy:
@@ -14,7 +17,7 @@ jobs:
       - name: Build site
         run: npm run build
       - name: Deploy
-        run: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.ACTION_GITHUB_TOKEN }}
           publish_dir: ./dist
